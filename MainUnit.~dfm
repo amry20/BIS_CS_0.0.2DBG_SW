@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 192
-  Top = 125
+  Left = 270
+  Top = 144
   Width = 1606
   Height = 873
   Caption = 'Bio Impedance Spectrometer Software System 0.0.1DBG'
@@ -1207,16 +1207,170 @@ object Form1: TForm1
       object sLabel1: TsLabel
         Left = 28
         Top = 32
-        Width = 40
+        Width = 34
         Height = 13
-        Caption = 'Device :'
+        Caption = 'Device'
       end
       object LabelDevice: TsLabel
-        Left = 74
-        Top = 33
-        Width = 46
+        Left = 120
+        Top = 32
+        Width = 52
         Height = 13
-        Caption = 'Unknown'
+        Caption = ': Unknown'
+      end
+      object sLabel2: TsLabel
+        Left = 28
+        Top = 52
+        Width = 49
+        Height = 13
+        Caption = 'Waveform'
+      end
+      object sLabel3: TsLabel
+        Left = 29
+        Top = 72
+        Width = 75
+        Height = 13
+        Caption = 'Frequency Now'
+      end
+      object sLabel4: TsLabel
+        Left = 28
+        Top = 92
+        Width = 34
+        Height = 13
+        Caption = 'Current'
+      end
+      object sLabel5: TsLabel
+        Left = 28
+        Top = 112
+        Width = 77
+        Height = 13
+        Caption = 'Initial Frequency'
+      end
+      object sLabel6: TsLabel
+        Left = 28
+        Top = 132
+        Width = 75
+        Height = 13
+        Caption = 'Final Frequency'
+      end
+      object sLabel7: TsLabel
+        Left = 28
+        Top = 152
+        Width = 32
+        Height = 13
+        Caption = 'Z Real'
+      end
+      object sLabel8: TsLabel
+        Left = 28
+        Top = 172
+        Width = 50
+        Height = 13
+        Caption = 'Z Imaginer'
+      end
+      object sLabel9: TsLabel
+        Left = 28
+        Top = 192
+        Width = 53
+        Height = 13
+        Caption = 'Impedance'
+      end
+      object sLabel10: TsLabel
+        Left = 28
+        Top = 212
+        Width = 30
+        Height = 13
+        Caption = 'Phase'
+      end
+      object sLabel11: TsLabel
+        Left = 28
+        Top = 232
+        Width = 53
+        Height = 13
+        Caption = 'Resistance'
+      end
+      object sLabel12: TsLabel
+        Left = 28
+        Top = 252
+        Width = 60
+        Height = 13
+        Caption = 'Capacitance'
+      end
+      object LabelWaveform: TsLabel
+        Left = 120
+        Top = 52
+        Width = 53
+        Height = 13
+        Caption = ': Sin Wave'
+      end
+      object LabelFreqNow: TsLabel
+        Left = 120
+        Top = 72
+        Width = 28
+        Height = 13
+        Caption = ': 0 Hz'
+      end
+      object LabelCurrent: TsLabel
+        Left = 120
+        Top = 92
+        Width = 30
+        Height = 13
+        Caption = ': 5 mA'
+      end
+      object LabelInitialFreq: TsLabel
+        Left = 120
+        Top = 112
+        Width = 52
+        Height = 13
+        Caption = ': Unknown'
+      end
+      object LabelFinalFreq: TsLabel
+        Left = 120
+        Top = 132
+        Width = 52
+        Height = 13
+        Caption = ': Unknown'
+      end
+      object LabelZReal: TsLabel
+        Left = 120
+        Top = 152
+        Width = 37
+        Height = 13
+        Caption = ': 0 Ohm'
+      end
+      object LabelZImaginer: TsLabel
+        Left = 120
+        Top = 172
+        Width = 37
+        Height = 13
+        Caption = ': 0 Ohm'
+      end
+      object LabelImpedance: TsLabel
+        Left = 120
+        Top = 192
+        Width = 37
+        Height = 13
+        Caption = ': 0 Ohm'
+      end
+      object LabelPhase: TsLabel
+        Left = 120
+        Top = 212
+        Width = 50
+        Height = 13
+        Caption = ': 0 Degree'
+      end
+      object LabelResistance: TsLabel
+        Left = 120
+        Top = 232
+        Width = 37
+        Height = 13
+        Caption = ': 0 Ohm'
+      end
+      object LabelCapacitance: TsLabel
+        Left = 120
+        Top = 252
+        Width = 27
+        Height = 13
+        Caption = ': 0 pF'
       end
     end
   end
@@ -1265,9 +1419,10 @@ object Form1: TForm1
     end
     object L1: TMenuItem
       Caption = 'View'
-      object S1: TMenuItem
+      object StatusViewBtn: TMenuItem
         Caption = 'Status Bar'
-        OnClick = S1Click
+        Checked = True
+        OnClick = StatusViewBtnClick
       end
     end
     object H1: TMenuItem

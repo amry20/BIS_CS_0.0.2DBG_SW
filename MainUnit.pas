@@ -45,6 +45,28 @@ type
     sImgLabel1: TsImgLabel;
     sLabel1: TsLabel;
     LabelDevice: TsLabel;
+    sLabel2: TsLabel;
+    sLabel3: TsLabel;
+    sLabel4: TsLabel;
+    sLabel5: TsLabel;
+    sLabel6: TsLabel;
+    sLabel7: TsLabel;
+    sLabel8: TsLabel;
+    sLabel9: TsLabel;
+    sLabel10: TsLabel;
+    sLabel11: TsLabel;
+    sLabel12: TsLabel;
+    LabelWaveform: TsLabel;
+    LabelFreqNow: TsLabel;
+    LabelCurrent: TsLabel;
+    LabelInitialFreq: TsLabel;
+    LabelFinalFreq: TsLabel;
+    LabelZReal: TsLabel;
+    LabelZImaginer: TsLabel;
+    LabelImpedance: TsLabel;
+    LabelPhase: TsLabel;
+    LabelResistance: TsLabel;
+    LabelCapacitance: TsLabel;
     procedure StatusViewBtnClick(Sender: TObject);
   private
     { Private declarations }
