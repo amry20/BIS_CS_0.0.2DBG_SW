@@ -37,7 +37,7 @@ type
     ToolButton7: TToolButton;
     sSpeedButton8: TsSpeedButton;
     sSplitView1: TsSplitView;
-    StatusViewBtn: TMenuItem;
+    S1: TMenuItem;
     sPanel1: TsPanel;
     ToolButton8: TToolButton;
     ComPort1: TComPort;
@@ -45,7 +45,7 @@ type
     sImgLabel1: TsImgLabel;
     sLabel1: TsLabel;
     LabelDevice: TsLabel;
-    procedure StatusViewBtnClick(Sender: TObject);
+    procedure S1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,7 +59,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.StatusViewBtnClick(Sender: TObject);
+procedure TForm1.S1Click(Sender: TObject);
 begin
   if (sSplitView1.Opened) then
   begin
@@ -68,7 +68,6 @@ begin
     mainPanel.Left := 0;
     MainPanel.Width := MainPanel.Width + 200;
     mainPanel.Anchors := [akLeft,akTop,akBottom,akRight];
-    StatusViewBtn.Checked := false;
   end
   else begin
     sSplitView1.Open;
@@ -76,7 +75,6 @@ begin
     MainPanel.Width := MainPanel.Width - 200;
     mainPanel.Left := 200;
     mainPanel.Anchors := [akLeft,akTop,akBottom,akRight];
-    StatusViewBtn.Checked := true;
   end;
 end;
 

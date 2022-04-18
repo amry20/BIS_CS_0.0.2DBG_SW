@@ -1265,10 +1265,9 @@ object Form1: TForm1
     end
     object L1: TMenuItem
       Caption = 'View'
-      object StatusViewBtn: TMenuItem
+      object S1: TMenuItem
         Caption = 'Status Bar'
-        Checked = True
-        OnClick = StatusViewBtnClick
+        OnClick = S1Click
       end
     end
     object H1: TMenuItem
