@@ -1,8 +1,8 @@
-object Form1: TForm1
-  Left = 270
-  Top = 144
-  Width = 1606
-  Height = 873
+object MainForm: TMainForm
+  Left = 180
+  Top = 113
+  Width = 1630
+  Height = 930
   Caption = 'Bio Impedance Spectrometer Software System 0.0.1DBG'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,16 +12,18 @@ object Form1: TForm1
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  Position = poDesktopCenter
   Scaled = False
+  OnCreate = FormCreate
   DesignSize = (
-    1590
-    814)
+    1614
+    871)
   PixelsPerInch = 96
   TextHeight = 13
   object sToolBar1: TsToolBar
     Left = 0
     Top = 0
-    Width = 1590
+    Width = 1614
     Height = 62
     ButtonHeight = 53
     Caption = 'sToolBar1'
@@ -34,7 +36,7 @@ object Form1: TForm1
       ImageIndex = 5
       Style = tbsSeparator
     end
-    object sSpeedButton2: TsSpeedButton
+    object OpenPortBtn: TsSpeedButton
       Left = 8
       Top = 2
       Width = 57
@@ -171,6 +173,7 @@ object Form1: TForm1
         CF00DCD8CF00DCD8CF00DCD8CF00000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
         000000000000}
+      OnClick = OpenPortBtnClick
     end
     object ToolButton2: TToolButton
       Left = 65
@@ -180,11 +183,12 @@ object Form1: TForm1
       ImageIndex = 0
       Style = tbsSeparator
     end
-    object sSpeedButton3: TsSpeedButton
+    object ConnectBtn: TsSpeedButton
       Left = 73
       Top = 2
       Width = 57
       Height = 53
+      Enabled = False
       Images = sVirtualImageList1
       ImageIndex = 0
     end
@@ -195,11 +199,13 @@ object Form1: TForm1
       Caption = 'ToolButton1'
       Style = tbsSeparator
     end
-    object sSpeedButton4: TsSpeedButton
+    object DisconnectBtn: TsSpeedButton
       Left = 138
       Top = 2
       Width = 57
       Height = 53
+      Enabled = False
+      OnClick = DisconnectBtnClick
       Images = sCharImageList1
       ImageIndex = 1
     end
@@ -348,6 +354,7 @@ object Form1: TForm1
         DE003240DC002B38C0002834B2002835B5002835B40000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
         000000000000}
+      OnClick = sSpeedButton5Click
       Images = sCharImageList1
     end
     object ToolButton4: TToolButton
@@ -975,7 +982,7 @@ object Form1: TForm1
       ImageIndex = 4
       Style = tbsSeparator
     end
-    object sSpeedButton8: TsSpeedButton
+    object ToolboxBtn: TsSpeedButton
       Left = 501
       Top = 2
       Width = 57
@@ -1150,26 +1157,38 @@ object Form1: TForm1
   object MainPanel: TsPanel
     Left = 200
     Top = 62
-    Width = 1389
-    Height = 722
+    Width = 1413
+    Height = 779
     SkinData.SkinSection = 'BARTITLE'
     Anchors = [akLeft, akTop, akRight, akBottom]
     DoubleBuffered = False
     TabOrder = 1
   end
-  object sStatusBar1: TsStatusBar
+  object StatusBar: TsStatusBar
     Left = 0
-    Top = 784
-    Width = 1590
+    Top = 841
+    Width = 1614
     Height = 30
-    Panels = <>
+    Panels = <
+      item
+        Text = '2022/04/18 10:00:00'
+        Width = 120
+      end
+      item
+        Text = 'Connection: Disconnected'
+        Width = 160
+      end
+      item
+        Text = 'Device: Unknown'
+        Width = 50
+      end>
     SkinData.SkinSection = 'BARTITLE'
   end
   object sSplitView1: TsSplitView
     Left = 0
     Top = 62
     Width = 200
-    Height = 722
+    Height = 779
     SkinData.CustomColor = True
     SkinData.SkinSection = 'STATUSBAR'
     AnimatedShowing = False
@@ -1180,12 +1199,12 @@ object Form1: TForm1
     TabOrder = 3
     DesignSize = (
       200
-      722)
+      779)
     object sPanel1: TsPanel
       Left = 0
       Top = 0
       Width = 200
-      Height = 722
+      Height = 779
       Anchors = [akLeft, akTop, akRight, akBottom]
       DoubleBuffered = False
       TabOrder = 0
@@ -1298,9 +1317,9 @@ object Form1: TForm1
       object LabelWaveform: TsLabel
         Left = 120
         Top = 52
-        Width = 53
+        Width = 59
         Height = 13
-        Caption = ': Sin Wave'
+        Caption = ': Sine Wave'
       end
       object LabelFreqNow: TsLabel
         Left = 120
@@ -1416,6 +1435,18 @@ object Form1: TForm1
     end
     object C1: TMenuItem
       Caption = 'Device'
+      object OpenPortMenu: TMenuItem
+        Caption = 'Serial Port'
+        OnClick = OpenPortMenuClick
+      end
+      object ConnectMenu: TMenuItem
+        Caption = 'Connect'
+        Enabled = False
+      end
+      object DisconnectMenu: TMenuItem
+        Caption = 'Disconnect'
+        Enabled = False
+      end
     end
     object L1: TMenuItem
       Caption = 'View'
@@ -1446,6 +1477,12 @@ object Form1: TForm1
       end
       item
         Char = 61474
+      end
+      item
+        Char = 61860
+      end
+      item
+        Char = 61459
       end>
     Left = 240
     Top = 72
@@ -1457,8 +1494,8 @@ object Form1: TForm1
     Top = 72
     Bitmap = {}
   end
-  object ComPort1: TComPort
-    BaudRate = br9600
+  object SerialPort: TComPort
+    BaudRate = br57600
     Port = 'COM1'
     Parity.Bits = prNone
     StopBits = sbOneStopBit
@@ -1470,6 +1507,9 @@ object Form1: TForm1
     FlowControl.ControlRTS = rtsDisable
     FlowControl.XonXoffOut = False
     FlowControl.XonXoffIn = False
+    Timeouts.ReadInterval = 1
+    Timeouts.ReadTotalMultiplier = 10
+    Timeouts.ReadTotalConstant = 100
     StoredProps = [spBasic]
     TriggersOnRxChar = True
     Left = 336
@@ -1479,5 +1519,10 @@ object Form1: TForm1
     UpdateEnabled = False
     Left = 368
     Top = 70
+  end
+  object TimerTimestamp: TTimer
+    OnTimer = TimerTimestampTimer
+    Left = 208
+    Top = 102
   end
 end
